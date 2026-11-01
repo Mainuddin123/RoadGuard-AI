@@ -18,14 +18,7 @@ from ultralytics import YOLO
 
 ROOT = Path(__file__).resolve().parent
 
-MODEL_PATH = (
-    ROOT
-    / "results"
-    / "yolo_training"
-    / "model2_pretrained"
-    / "weights"
-    / "best.pt"
-)
+MODEL_PATH = ROOT / "results" / "yolo_training" / "model2_final" / "weights" / "best.pt"
 
 CLASS_NAMES = {
     0: "Pothole",
@@ -597,7 +590,9 @@ if page == "Image Detection":
                 "AI is analyzing your road image..."
             ):
 
-                image_array = np.array(image)
+                image_array = cv2.cvtColor(
+                    np.array(image),
+                    cv2.COLOR_RGB2BGR)
 
                 start = time.perf_counter()
 

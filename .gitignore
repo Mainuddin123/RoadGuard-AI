@@ -12,6 +12,19 @@ results/webcam_demo/*.mp4
 .DS_Store
 Thumbs.db
 
-results/yolo_benchmark/
+# Temporary annotation audits
+results/overlap_audit.txt
+src/audit_label_overlaps.py
+src/inspect_conflict.py
+src/inspect_one_annotation.py
+src/inspect_overlap_details.py
 
+# YOLO generated cache files
+*.cache
+
+# Experimental outputs
+results/yolo_benchmark/
 results/yolo_predictions/
+results/yolo_test_evaluation/finetuned/
+results/yolo_training/model2_finetune_5epochs/
+*.cache
