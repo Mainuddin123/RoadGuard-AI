@@ -1,0 +1,17 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+dataset/raw/
+dataset/images/
+dataset/yolo_dataset/images/
+results/video_demo/*.mp4
+results/webcam_demo/*.mp4
+*.log
+.DS_Store
+Thumbs.db
+
+results/yolo_benchmark/
+
+results/yolo_predictions/

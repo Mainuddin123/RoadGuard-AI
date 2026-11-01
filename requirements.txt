@@ -1,0 +1,15 @@
+
+numpy==2.4.6
+pandas
+matplotlib
+seaborn
+opencv-python==5.0.0.93
+pillow
+tqdm
+lxml
+torch==2.15.0
+torchvision==0.29.2
+torchmetrics
+ultralytics==8.4.195
+
+streamlit==1.66.1
