@@ -1,222 +1,343 @@
-# 🛣️ RoadGuard AI — Smart Road Damage & Hazard Detection
+# 🚧 RoadGuard AI — Smart Road Damage & Hazard Detection
 
-An AI-powered road damage detection system that identifies potholes, cracks, and manholes using YOLOv8 object detection.
+**An AI-powered road monitoring prototype using YOLOv8 to detect potholes, road cracks, and manholes from images and videos.**
+
+<p align="center">
+  <strong>Computer Vision | Deep Learning | Object Detection | Python | Streamlit</strong>
+</p>
+
+<p align="center">
+  <a href="https://roadguard-ai-ieilzx9wrrjzvrk89vfrei.streamlit.app/">
+    <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Open RoadGuard AI">
+  </a>
+</p>
+
+---
+
+## 🌐 Live Demo
+
+**[🚀 Launch RoadGuard AI](https://roadguard-ai-ieilzx9wrrjzvrk89vfrei.streamlit.app/)**
+
+**GitHub Repository:** [Mainuddin123/RoadGuard-AI](https://github.com/Mainuddin123/RoadGuard-AI)
+
+---
 
 ## 📌 Project Overview
 
-RoadGuard AI uses computer vision and deep learning to detect road surface damage and potential hazards.
+RoadGuard AI is a computer vision-based application developed to identify road-related hazards using a YOLOv8 object detection model.
 
-The system supports:
-- Image-based road damage detection
-- Recorded video detection
-- Live webcam detection
-- Bounding-box visualization
-- Class labels and confidence scores
-- FPS measurement
+The application analyzes uploaded road images and videos to identify three categories:
 
-## 🎯 Detection Classes
+- 🕳️ Potholes
+- 🛣️ Road Cracks
+- 🚧 Manholes
 
-| Class ID | Class |
+It generates annotated outputs with bounding boxes and confidence scores, along with detection summaries and downloadable results through an interactive Streamlit application.
+
+The project demonstrates an end-to-end deep learning workflow, including dataset preparation, model training, evaluation, application development, and cloud deployment.
+
+## 🎯 Project Objectives
+
+- Automate the identification of visible road hazards.
+- Implement YOLOv8 for object detection.
+- Support image-based and video-based analysis.
+- Visualize detected objects using bounding boxes.
+- Display confidence scores and detection statistics.
+- Develop an interactive web application for road hazard analysis.
+
+## ✨ Key Features
+
+### 1. Image Detection
+
+- Upload road images in JPG and PNG formats.
+- Detect potholes, cracks, and manholes.
+- Display annotated images with bounding boxes.
+- Show object-level confidence scores.
+- View detection counts and inference time.
+- Download annotated images.
+
+### 2. Video Detection
+
+- Upload road videos for frame-based analysis.
+- Process video frames using YOLOv8.
+- Display detected road hazards.
+- Generate processed video output.
+- Show processing time and FPS.
+- Download processed videos.
+
+### 3. Model Configuration
+
+- Adjustable confidence threshold.
+- Configurable inference image size.
+- CPU-based model inference.
+
+### 4. Interactive Dashboard
+
+- Professional dark-themed interface.
+- Separate Image Detection and Video Detection modules.
+- Model configuration panel.
+- Project information page.
+
+## 🧠 Model Architecture
+
+The project uses **YOLOv8n (You Only Look Once)**, a lightweight object detection model initialized with pretrained weights and fine-tuned for three road hazard classes.
+
+| Component | Details |
+|---|---|
+| Model | YOLOv8n |
+| Task | Object Detection |
+| Framework | Ultralytics |
+| Initialization | Pretrained YOLOv8 detector |
+| Training Epochs | 5 |
+| Input Image Size | 416 × 416 |
+| Training Device | CPU |
+| Detection Classes | 3 |
+
+### Detection Classes
+
+| Class ID | Class Name |
 |---|---|
 | 0 | Pothole |
 | 1 | Crack |
 | 2 | Manhole |
 
-## 🧰 Technologies Used
+## 📊 Dataset Information
 
-- Python
-- PyTorch
-- Ultralytics YOLOv8
-- OpenCV
-- NumPy
-- VS Code
+The project uses the **Road Damage Dataset: Potholes, Cracks and Manholes**.
 
-## 📂 Dataset
+The dataset was converted into YOLO annotation format and divided into training, validation, and testing subsets.
 
-**Dataset:** Road Damage Dataset: Potholes, Cracks and Manholes
-
-**Source:** [Kaggle Dataset](https://www.kaggle.com/datasets/lorenzoarcioni/road-damage-dataset-potholes-cracks-and-manholes)
-
-### Dataset Statistics
-
-| Description | Count |
-|---|---:|
-| Unique images | 1,999 |
-| Annotated objects | 4,701 |
-| Training images | 1,406 |
-| Validation images | 292 |
-| Testing images | 301 |
-
-### Class Distribution
-
-| Class | Objects |
-|---|---:|
-| Pothole | 1,253 |
-| Crack | 2,498 |
-| Manhole | 950 |
-
-The dataset was cleaned, duplicate images were excluded, and a group-aware train-validation-test split was performed.
-
-## 🧠 Models Implemented
-
-Two YOLOv8n models were trained and compared.
-
-### Model 1 — YOLOv8n from Scratch
-
-- Random initialization
-- 3 training epochs
-- Image size: 416 × 416
-- Batch size: 1
-- CPU training
-
-### Model 2 — Pretrained YOLOv8n
-
-- Initialized from pretrained YOLOv8n detector weights
-- Fine-tuned on the road damage dataset
-- 3 training epochs
-- Image size: 416 × 416
-- Batch size: 1
-- CPU training
-
-## 📊 Model Comparison
-
-Held-out test set results:
-
-| Metric | Scratch | Pretrained |
+| Dataset Split | Images | Annotated Objects |
 |---|---:|---:|
-| Precision | 0.0018 | 0.2646 |
-| Recall | 0.1859 | 0.2911 |
-| mAP@50 | 0.0023 | 0.1790 |
-| mAP@50–95 | 0.0004 | 0.0782 |
-| Inference time/image | 41.3 ms | 59.9 ms |
-| Training time | 34.3 min | 41.35 min |
-| Model size | 6.2 MB | 6.5 MB |
+| Training | 1,406 | 3,263 |
+| Validation | 292 | 719 |
+| Testing | 301 | 709 |
+| **Total** | **1,999** | **4,691** |
 
-The pretrained model performed better than the scratch model on the held-out test set. However, its overall detection performance remains limited.
+### Dataset Preparation and Validation
 
-## 🎥 Demonstrations
+- YOLO annotation format validation.
+- Image and label consistency checks.
+- Bounding-box boundary analysis.
+- Training, validation, and test split verification.
+- Dataset integrity checks.
 
-### Recorded Video Detection
+## 📈 Model Evaluation
 
-The system was tested on three recorded videos.
+The trained model was evaluated on a separate held-out test dataset containing 301 images and 709 annotated objects.
 
-| Video | Frames | Detections | FPS |
+### Overall Test Performance
+
+| Evaluation Metric | Result |
+|---|---:|
+| Precision | 0.2127 |
+| Recall | 0.2793 |
+| mAP@50 | 0.1806 |
+| mAP@50–95 | 0.0706 |
+| Inference Speed | 31.5 ms/image |
+
+### Class-wise Evaluation
+
+| Class | Precision | Recall | mAP@50 |
 |---|---:|---:|---:|
-| demo1.mp4 | 142 | 4 | 10.47 |
-| demo2.mp4 | 39 | 0 | 9.67 |
-| demo3.mp4 | 21 | 0 | 6.12 |
+| Pothole | 0.231 | 0.128 | 0.0944 |
+| Crack | 0.222 | 0.0794 | 0.0757 |
+| Manhole | 0.185 | 0.630 | 0.3720 |
 
-### Live Webcam Detection
+**Performance note:** The current model has limited detection performance, particularly for potholes and cracks. These metrics are the measured results from the held-out test dataset, not estimated or claimed accuracy.
 
-Implemented features:
-- Fullscreen webcam display
-- Real-time object detection
-- Bounding-box visualization
-- FPS display
-- Processed video recording
+Further training, dataset improvement, and model optimization are required before practical deployment.
 
-Observed webcam performance: approximately 11–13 FPS on CPU.
+## 🏗️ Project Architecture
 
-## ⚙️ Installation
+```text
+RoadGuard-AI/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── results/
+│   └── yolo_training/
+│       └── model2_final/
+│           └── weights/
+│               └── best.pt
+│
+├── dataset/
+│   └── yolo_dataset/
+│       ├── images/
+│       ├── labels/
+│       └── data.yaml
+│
+└── src/
+    └── analyze_boundary_errors.py
+```
 
-Clone the repository:
+**Note:** This is a simplified representation of the main project structure. Raw dataset files and some local development artifacts are not included in the GitHub repository.
+
+## ⚙️ Technology Stack
+
+| Category | Technologies |
+|---|---|
+| Programming Language | Python |
+| Deep Learning | YOLOv8 |
+| Computer Vision | OpenCV |
+| Deep Learning Framework | PyTorch |
+| Data Processing | NumPy, Pandas |
+| Visualization | Matplotlib, Seaborn |
+| Web Application | Streamlit |
+| Model Evaluation | Precision, Recall, mAP |
+| Version Control | Git, GitHub |
+| Deployment | Streamlit Community Cloud |
+
+## 🔄 Application Workflow
+
+```text
+          Road Image / Video
+                  |
+                  v
+           Upload Interface
+                  |
+                  v
+          Image / Video Input
+                  |
+                  v
+          YOLOv8 Detection
+                  |
+                  v
+          Object Detection
+                  |
+          +-------+-------+
+          |       |       |
+          v       v       v
+       Pothole  Crack  Manhole
+          |       |       |
+          +-------+-------+
+                  |
+                  v
+         Bounding Box Annotation
+                  |
+                  v
+          Detection Statistics
+                  |
+                  v
+          Download Results
+```
+
+## 🚀 Installation and Setup
+
+### Prerequisites
+
+- Python 3.11
+- Git
+- VS Code or another Python IDE
+
+### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/RoadGuard-AI.git
+git clone https://github.com/Mainuddin123/RoadGuard-AI.git
+```
+
+### Step 2: Navigate to the Project Directory
+
+```bash
 cd RoadGuard-AI
 ```
 
-Create a virtual environment:
+### Step 3: Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate it on Windows:
+Activate the environment on Windows:
 
-```powershell
-.\venv\Scripts\Activate.ps1
+```bash
+venv\Scripts\activate
 ```
 
-Install dependencies:
+### Step 4: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## ▶️ Run the Project
+### Step 5: Run the Streamlit Application
 
-### Recorded Video Detection
-
-```powershell
-python src/detect_video.py
+```bash
+streamlit run app.py
 ```
 
-Enter the path of your video when prompted.
+The application will open in your default browser.
 
-### Live Webcam Detection
+**Important:** The trained model checkpoint must be available at the model path configured in `app.py`.
 
-```powershell
-python src/detect_webcam.py
-```
+## 🖥️ How to Use
 
-Press `Q` to stop webcam detection.
+1. Open the RoadGuard AI application.
+2. Select Image Detection or Video Detection.
+3. Upload a road image or video.
+4. Adjust the confidence threshold and image size if required.
+5. Run the detection process.
+6. Review the annotated output and detection statistics.
+7. Download the processed image or video.
 
-## 📁 Project Structure
+## ⚠️ Known Limitations
 
-```text
-RoadGuard-AI/
-│
-├── dataset/
-│   ├── raw/
-│   └── yolo_dataset/
-│
-├── models/
-│
-├── src/
-│   ├── train_yolo_scratch.py
-│   ├── train_yolo_pretrained.py
-│   ├── evaluate_yolo_test.py
-│   ├── visualize_yolo_test.py
-│   ├── detect_video.py
-│   └── detect_webcam.py
-│
-├── results/
-│   ├── yolo_training/
-│   ├── yolo_test_evaluation/
-│   ├── yolo_predictions/
-│   ├── video_demo/
-│   ├── webcam_demo/
-│   └── FINAL_EVALUATION.md
-│
-├── requirements.txt
-└── README.md
-```
+The current implementation is an experimental prototype. Its limitations include:
 
-## ⚠️ Limitations
+1. **Missed detections:** Some visible road damage may not be identified.
+2. **Low-confidence predictions:** Certain detections have low confidence scores.
+3. **False positives:** Normal road textures may sometimes be classified as road hazards.
+4. **Overlapping bounding boxes:** Multiple boxes may identify the same damaged region.
+5. **Limited training:** The model was trained for only five epochs.
+6. **Dataset limitations:** Dataset size and class distribution can affect generalization.
+7. **Video summary inconsistency:** In some tests, displayed detection boxes did not match the total detection count in the summary.
 
-- Current test-set detection performance is limited.
-- Crack detection requires improvement.
-- Video detections were inconsistent across the three tested videos.
-- Webcam testing did not confirm successful road-hazard detection.
-- CPU inference is slower than GPU inference.
-- Model 2 uses pretrained full-detector weights, not only a pretrained backbone with a newly initialized detection head.
+### Future Improvements
 
-## 🚀 Future Improvements
+- Increase dataset size and diversity.
+- Train for additional epochs.
+- Optimize model hyperparameters.
+- Improve pothole and crack detection.
+- Apply suitable data augmentation and class balancing.
+- Investigate duplicate detections and non-maximum suppression.
+- Improve video detection counting and reporting.
+- Evaluate on more real-world road conditions.
+- Explore advanced object detection architectures.
 
-- Increase training epochs.
-- Improve annotation quality and dataset diversity.
-- Add more road images from different geographical regions.
-- Improve crack detection performance.
-- Evaluate on direct road-camera footage.
-- Optimize inference speed.
+## 🔮 Future Scope
 
-## 👨‍💻 Author
+Potential extensions of RoadGuard AI include:
+
+- Real-time road hazard detection.
+- GPS-based hazard location tracking.
+- Road condition monitoring dashboards.
+- Automated road maintenance reporting.
+- Integration with smart city infrastructure.
+
+These are proposed enhancements and are not currently implemented.
+
+## 👨‍💻 Developer
 
 **Khaja Mainuddin**
 
-AI & Data Science Graduate
+B.Tech — Artificial Intelligence and Data Science
+
+- **GitHub:** [Mainuddin123](https://github.com/Mainuddin123)
+- **LinkedIn:** [Khaja Mainuddin](https://www.linkedin.com/in/khaja-mainuddin-sk-958436348)
+- **Live Project:** [RoadGuard AI](https://roadguard-ai-ieilzx9wrrjzvrk89vfrei.streamlit.app/)
 
 ---
 
-*RoadGuard AI — Smart Road Damage & Hazard Detection*
+## 📄 Disclaimer
+
+RoadGuard AI is an educational and experimental computer vision project developed to demonstrate object detection for road hazard identification.
+
+Its predictions should not be treated as verified road safety assessments or used as the sole basis for road maintenance decisions. Further model development, validation, and real-world testing are necessary before practical use.
+
+---
+
+<p align="center">
+  <strong>🚧 RoadGuard AI — Making Road Monitoring Smarter with Computer Vision</strong>
+</p>
